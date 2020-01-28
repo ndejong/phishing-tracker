@@ -29,10 +29,10 @@ def test_analyzer_https_certificate(capsys):
     reference = 'https://www.google.com'
     __test_analyzer_meta(analyzers, capsys, reference=reference)
 
-def test_analyzer_smtp(capsys):
-    analyzers = ['smtp']
-    reference = 'https://www.google.com'
-    __test_analyzer_meta(analyzers, capsys, reference=reference)
+# def test_analyzer_smtp(capsys):
+#     analyzers = ['smtp']
+#     reference = 'https://www.google.com'
+#     __test_analyzer_meta(analyzers, capsys, reference=reference)
 
 
 def __test_analyzer_meta(analyzers, capsys, reference='https://www.google.com'):
