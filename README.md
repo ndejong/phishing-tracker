@@ -7,6 +7,14 @@
 
 Utility to manage sets of phishing links making it easier to track their removal progress over time.
 
+Project started out of frustration in dealing over-and-over again with phishing threat-actors and wanting an easy tool
+to handle the tracking of these links over time without needing to roll out a full-fledged CERT stack (eg The Hive)
+
+Captures everything per-run in a single JSON file making it easy to compare and track change over time - and integrate
+with other tooling if desired.
+
+See examples to get a clear idea on usage and possibilities.
+
 ## Features
 * Batch mode with `.yml` configuration file
 * Single shot mode by passing link/hostname/domain in at cli
@@ -17,12 +25,16 @@ Utility to manage sets of phishing links making it easier to track their removal
 
 ## Analyzers
 * dig-domain - determine domain relative to TLD and collect A, CNAME, NS, MX, TXT records
-* dig-hostname - collect A, AAAA, CNAME, NS, MX, TXT records
+* dig-hostname - collect hostname A, AAAA, CNAME, NS, MX, TXT records
 * http-get - perform http (clear-text) GET request capturing request/response headers and response content
-* https-get - perform same as per http-get using HTTPS
-* https-certificate - obtain the https SSL certificate and parse attributes 
+* https-get - as per http-get using HTTPS
+* https-certificate - obtain the https SSL certificate and parse certificate attributes 
 * smtp-headers - connect to hostname/domain MX records and capture the server header 
 * whois - perform a whois and parse associated attributes
+
+## Analyzers - Todo
+* Safe Browsing lookup - https://developers.google.com/safe-browsing/v4/lookup-api
+* Virustotal lookup - https://developers.virustotal.com/reference#url-scan
 
 ## Install
 #### via PyPi
