@@ -1,0 +1,47 @@
+#!/usr/bin/env python3
+
+import sys
+import argparse
+import PhishingTracker
+
+
+parser = argparse.ArgumentParser(
+    description='{} v{}'.format(PhishingTracker.NAME, PhishingTracker.VERSION),
+    add_help=False,
+    epilog="""
+    """,
+)
+
+exclusive = parser.add_mutually_exclusive_group()
+
+exclusive.add_argument('-l', '--link', metavar='<urllink>', type=str,
+                       help='Phishing link (single-shot mode).')
+
+exclusive.add_argument('-f', '--file', metavar='<filename>', type=str,
+                       help='Phishing links in file, YAML formatted (batch mode).')
+
+parser.add_argument('-p', '--path', metavar='<savepath>', type=str,
+                       help='Base path to save output json data files into.')
+
+parser.add_argument('-a', '--analyzer', metavar='<analyzer>', type=str, default=None,
+                    choices=['all'] + PhishingTracker.analyzers_available,
+                    help='Analyzer to perform on links (default: all).')
+
+parser.add_argument('-d', '--debug', action='store_true', default=False,
+                    help='Debug logging output (default: False).')
+
+if len(sys.argv) == 1:
+    parser.print_help()
+    print()
+    exit(1)
+
+args = parser.parse_args()
+
+if __name__ == '__main__':
+
+    PhishingTracker.PhishingTracker(debug=args.debug).main(
+        reference=args.link,
+        filename=args.file,
+        pathname=args.path,
+        analyzers=[args.analyzer]
+    )

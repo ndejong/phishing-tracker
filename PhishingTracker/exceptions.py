@@ -1,0 +1,3 @@
+
+class PhishingTrackerException(Exception):
+    pass
