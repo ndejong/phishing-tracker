@@ -26,15 +26,19 @@ class PhishingTrackerAnalyzers:
 
         if 'dig' in analyzers or 'smtp' in analyzers:
             analyzer_data['dig'] = {}
+
             logger.debug('dig-domain analyzer: {}'.format(data['meta']['domain_name']))
-            analyzer_data['dig']['domain_name'] = PhishingTrackerDig.analyzer(record=data['meta']['domain_name'])
-            if data['meta']['host_name'] != data['meta']['domain_name']:
+            if data['meta']['domain_name'] is not None:
+                analyzer_data['dig']['domain_name'] = PhishingTrackerDig.analyzer(record=data['meta']['domain_name'])
+
+            if data['meta']['host_name'] != data['meta']['domain_name'] and data['meta']['domain_name'] is not None:
                 logger.debug('dig-host analyzer: {}'.format(data['meta']['host_name']))
-                analyzer_data['dig']['host_name'] = PhishingTrackerDig.analyzer(record=data['meta']['host_name'])
+                if data['meta']['host_name'] is not None:
+                    analyzer_data['dig']['host_name'] = PhishingTrackerDig.analyzer(record=data['meta']['host_name'])
 
         if 'smtp' in analyzers and 'dig' in analyzer_data:
             analyzer_data['smtp'] = {}
-            if 'domain_name' in analyzer_data['dig'] and len(analyzer_data['dig']['domain_name']['MX']) > 0:
+            if 'domain_name' in analyzer_data['dig'] and analyzer_data['dig']['domain_name'] is not None and len(analyzer_data['dig']['domain_name']['MX']) > 0:
                 logger.debug('smtp-domain analyzer: {}'.format(', '.join(analyzer_data['dig']['domain_name']['MX']) ))
                 analyzer_data['smtp']['domain_name'] = PhishingTrackerSmtp.analyzer(analyzer_data['dig']['domain_name']['MX'])
             if 'host_name' in analyzer_data['dig'] and len(analyzer_data['dig']['host_name']['MX']) > 0:
@@ -69,7 +73,7 @@ class PhishingTrackerAnalyzers:
         analyzers_data = data['analyzers']
 
         if 'dig' in analyzers_data:
-            if 'host_name' in analyzers_data['dig']:
+            if 'host_name' in analyzers_data['dig'] and analyzers_data['dig']['host_name'] is not None:
                 if len(analyzers_data['dig']['host_name']['A']) > 0:
                     status.append('dns_hostname_a_record')
                 if len(analyzers_data['dig']['host_name']['AAAA']) > 0:
@@ -83,7 +87,7 @@ class PhishingTrackerAnalyzers:
                 if len(analyzers_data['dig']['host_name']['TXT']) > 0:
                     status.append('dns_hostname_txt_record')
 
-            if 'domain_name' in analyzers_data['dig']:
+            if 'domain_name' in analyzers_data['dig'] and analyzers_data['dig']['domain_name'] is not None:
                 if len(analyzers_data['dig']['domain_name']['A']) > 0:
                     status.append('dns_domainname_a_record')
                 if len(analyzers_data['dig']['domain_name']['AAAA']) > 0:
@@ -98,7 +102,10 @@ class PhishingTrackerAnalyzers:
                     status.append('dns_domainname_txt_record')
 
         if data['meta']['host_name'] == data['meta']['domain_name']:
-            status.append('dns_hostname_eq_dns_domainname')
+            if len(data['meta']['domain_name']) > 0:
+                status.append('dns_hostname_eq_dns_domainname')
+            else:
+                status.append('dns_domainname_tld_unknown')
 
         if 'http' in analyzers_data:
             if 'exception' in analyzers_data['http']:

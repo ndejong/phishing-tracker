@@ -7,6 +7,9 @@ class PhishingTrackerDig:
     @staticmethod
     def analyzer(record, type='ANY'):
 
+        if record is None or len(record) == 0:
+            return None
+
         type = type.upper()
 
         if type == 'ANY':
