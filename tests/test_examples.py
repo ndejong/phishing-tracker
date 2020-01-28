@@ -1,11 +1,17 @@
 
+import os
 import json
 import pytest
 import PhishingTracker
 
 
 def test_analyzer_examples01(capsys):
-    analyzers = None
+
+    if os.getenv('CI'):
+        analyzers = ['dig', 'http', 'https', 'https_certificate', 'whois']  # TravisCI does not permit outbound SMTP / TCP25
+    else:
+        analyzers = None
+
     reference = 'https://www.google.com'
 
     PhishingTracker.PhishingTracker(debug=True).main(
