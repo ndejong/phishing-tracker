@@ -17,7 +17,7 @@ Utility to manage sets of phishing links making it easier to track their removal
 
 ## Analyzers
 * dig-domain - determine domain relative to TLD and collect A, CNAME, NS, MX, TXT records
-* dig-hostname - collect A, CNAME, NS, MX, TXT records
+* dig-hostname - collect A, AAAA, CNAME, NS, MX, TXT records
 * http-get - perform http (clear-text) GET request capturing request/response headers and response content
 * https-get - perform same as per http-get using HTTPS
 * https-certificate - obtain the https SSL certificate and parse attributes 
