@@ -24,7 +24,3 @@ class PhishingTrackerDig:
         if type == 'TXT':
             response = [s.strip('"') for s in response]
         return response
-
-    @staticmethod
-    def test(tests, data):
-        pass

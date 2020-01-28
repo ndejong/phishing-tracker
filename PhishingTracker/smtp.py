@@ -29,7 +29,3 @@ class PhishingTrackerSmtp:
             return None
 
         return data
-
-    @staticmethod
-    def test(tests, data):
-        pass

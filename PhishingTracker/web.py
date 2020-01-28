@@ -34,7 +34,3 @@ class PhishingTrackerWeb:
         }
 
         return data
-
-    @staticmethod
-    def test(tests, data):
-        pass

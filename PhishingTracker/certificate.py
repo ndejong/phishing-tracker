@@ -83,7 +83,3 @@ class PhishingTrackerCertificate:
             data['notAfter'] = datetime_parse(data['notAfter'])
 
         return data
-
-    @staticmethod
-    def test(tests, data):
-        pass
