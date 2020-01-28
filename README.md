@@ -64,6 +64,7 @@ dns_domainname_cname_record
 dns_domainname_mx_record
 dns_domainname_ns_record
 dns_domainname_txt_record
+dns_domainname_unknown_tld
 dns_hostname_aaaa_record
 dns_hostname_a_record
 dns_hostname_cname_record
@@ -85,9 +86,8 @@ whois_exception
 ```
 
 ## Examples
-Pending
+* [examples01.yml](https://github.com/ndejong/phishing-tracker/blob/master/examples/examples01.yml)
 
-****
 
 ## Authors
 [Nicholas de Jong](https://nicholasdejong.com)

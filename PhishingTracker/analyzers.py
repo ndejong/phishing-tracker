@@ -105,7 +105,7 @@ class PhishingTrackerAnalyzers:
             if len(data['meta']['domain_name']) > 0:
                 status.append('dns_hostname_eq_dns_domainname')
             else:
-                status.append('dns_domainname_tld_unknown')
+                status.append('dns_domainname_unknown_tld')
 
         if 'http' in analyzers_data:
             if 'exception' in analyzers_data['http']:
