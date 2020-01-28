@@ -1,0 +1,35 @@
+
+---
+
+# Example 1- simple one line
+https://www.google.com/:
+
+# Example 2 - dictating which analyzers to operate
+https://www.google.com/:
+  analyzers: ['dig', 'whois']
+
+# Example 3 - using the analyzer features
+https://www.google.com/:
+  enabled: true
+  analyzer_report_sets_expected:
+    - ['http_hostname_301_response', 'https_hostname_200_response']
+  analyzer_report_sets_not_expected:
+    - 'whois_exception'
+    - 'http_hostname_200_response'
+    - 'https_certificate_hostname_mismatch'
+
+# Example 4 - using the test regex features
+google.com:
+  smtp:
+    http:
+      - matches: "google"
+
+# Example 5 - putting tests and analyzers together
+http://www.google.com/:
+  analyzers: ['dig', 'http', 'https', 'https_certificate', 'smtp', 'whois']
+  analyzer_report_sets_not_expected:
+    - 'http_hostname_200_response'
+    - 'https_certificate_hostname_mismatch'
+  tests:
+    https:
+      - matches: ["\.foo.*?bar", "fish"]

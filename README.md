@@ -57,6 +57,33 @@ python3 setup.py install
 ## Project
 * [github.com/ndejong/phishing-tracker](https://github.com/ndejong/phishing-tracker)
 
+## Analyzer Response Reports
+```dns_domainname_aaaa_record
+dns_domainname_a_record
+dns_domainname_cname_record
+dns_domainname_mx_record
+dns_domainname_ns_record
+dns_domainname_txt_record
+dns_hostname_aaaa_record
+dns_hostname_a_record
+dns_hostname_cname_record
+dns_hostname_eq_dns_domainname
+dns_hostname_mx_record
+dns_hostname_ns_record
+dns_hostname_txt_record
+http_exception
+http_hostname_<statuscode>_response
+https_certificate_exception
+https_certificate_hostname_mismatch
+https_exception
+https_hostname_<statuscode>_response
+smtp_domainname_active
+smtp_exception
+smtp_hostname_active
+whois_domainname_record
+whois_exception
+```
+
 ## Examples
 Pending
 
