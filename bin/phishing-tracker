@@ -1,9 +1,14 @@
 #!/usr/bin/env python3
 
+import os
 import sys
 import argparse
-import PhishingTracker
 
+try:
+    import PhishingTracker
+except:
+    sys.path.append(os.path.join(os.path.dirname(__file__), '..'))
+    import PhishingTracker
 
 parser = argparse.ArgumentParser(
     description='{} v{}'.format(PhishingTracker.NAME, PhishingTracker.VERSION),
