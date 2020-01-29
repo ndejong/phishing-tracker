@@ -3,6 +3,7 @@
 import os
 import sys
 import argparse
+import tempfile
 
 try:
     import PhishingTracker
@@ -25,8 +26,8 @@ exclusive.add_argument('-l', '--link', metavar='<urllink>', type=str,
 exclusive.add_argument('-f', '--file', metavar='<filename>', type=str,
                        help='Phishing links in file, YAML formatted (batch mode).')
 
-parser.add_argument('-p', '--path', metavar='<savepath>', type=str,
-                       help='Base path to save output json data files into.')
+parser.add_argument('-p', '--path', metavar='<savepath>', type=str, default=tempfile.gettempdir(),
+                       help='Base path to save output json data files into (default: /tmp).')
 
 parser.add_argument('-a', '--analyzer', metavar='<analyzer>', type=str, default=None,
                     choices=['all'] + PhishingTracker.analyzers_available,
