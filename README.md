@@ -30,10 +30,10 @@ See examples to get a clear idea on usage and possibilities.
 * https-get - as per http-get using HTTPS
 * https-certificate - obtain the https SSL certificate and parse certificate attributes 
 * smtp-headers - connect to hostname/domain MX records and capture the server header 
+* safe-browsing - query the Google safe-browsing API - https://developers.google.com/safe-browsing/v4
 * whois - perform a whois and parse associated attributes
 
 ## Analyzers - Todo
-* Safe Browsing lookup - https://developers.google.com/safe-browsing/v4/lookup-api
 * Virustotal lookup - https://developers.virustotal.com/reference#url-scan
 
 ## Install
