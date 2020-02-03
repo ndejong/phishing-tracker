@@ -78,12 +78,18 @@ https_certificate_exception
 https_certificate_hostname_mismatch
 https_exception
 https_hostname_<statuscode>_response
+safe_browsing_exception
+safe_browsing_record
 smtp_domainname_active
 smtp_exception
 smtp_hostname_active
 whois_domainname_record
 whois_exception
 ```
+
+## Google Safe Browsing API key
+In order to make use of the Google Safe Browsing API lookup, the environment variable `GCP_API_KEY` needs to be
+set with an appropriate GCP key that has access to the safe-browsing API - [read more here](https://developers.google.com/safe-browsing/v4/get-started).
 
 ## Examples
 * [examples01.yml](https://github.com/ndejong/phishing-tracker/blob/master/examples/examples01.yml)

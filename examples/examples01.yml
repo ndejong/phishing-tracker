@@ -18,15 +18,22 @@ https://www.google.com/:
     - 'whois_exception'
     - 'http_hostname_200_response'
     - 'https_certificate_hostname_mismatch'
+    - 'safe_browsing_record'
 
-# Example 4 - using the test regex features
+# Example 3 - google safe browsing hit
+https://testsafebrowsing.appspot.com/s/phishing.html:
+  enabled: true
+  analyzer_report_sets_expected:
+    - ['safe_browsing_record']
+
+# Example 5 - using the test regex features
 google.com:
   enabled: true
   smtp:
     http:
       - matches: "google"
 
-# Example 5 - putting tests and analyzers together
+# Example 6 - putting tests and analyzers together
 http://www.google.com/:
   analyzers: ['dig', 'http', 'https', 'https_certificate', 'smtp', 'whois']
   analyzer_report_sets_not_expected:
