@@ -1,5 +1,5 @@
 
-analyzers_available = ['dig', 'http', 'https', 'https_certificate', 'smtp', 'whois']
+analyzers_available = ['dig', 'http', 'https', 'https_certificate', 'smtp', 'whois', 'safe_browsing']
 
 from .__name__ import NAME
 from .__version__ import VERSION
@@ -15,6 +15,7 @@ from .dig import PhishingTrackerDig
 from .smtp import PhishingTrackerSmtp
 from .web import PhishingTrackerWeb
 from .whois import PhishingTrackerWhois
+from .safebrowsing import PhishingTrackerSafeBrowsing
 
 from .analyzers import PhishingTrackerAnalyzers
 from .tests import PhishingTrackerTests

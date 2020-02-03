@@ -1,11 +1,13 @@
 
+import os
+import copy
+
 from . import PhishingTrackerCertificate
 from . import PhishingTrackerDig
 from . import PhishingTrackerSmtp
 from . import PhishingTrackerWeb
 from . import PhishingTrackerWhois
-
-import copy
+from . import PhishingTrackerSafeBrowsing
 
 
 class PhishingTrackerAnalyzers:
@@ -64,6 +66,18 @@ class PhishingTrackerAnalyzers:
         if 'https_certificate' in analyzers:
             logger.debug('https-certificate analyzer: {}'.format(https_url))
             analyzer_data['https_certificate'] = PhishingTrackerCertificate.analyzer(hostname=data['meta']['host_name'])
+
+        if 'safe_browsing' in analyzers:
+
+            if not os.getenv('GCP_API_KEY', None):
+                logger.warn('GCP_API_KEY environment variable not set, skipping the safe_browsing analyzer')
+            else:
+                logger.debug('GCP_API_KEY environment variable setting detected, will use with safe_browsing analyzer')
+                logger.debug('safe-browsing analyzer: {}'.format(http_url))
+                analyzer_data['safe_browsing'] = PhishingTrackerSafeBrowsing.analyzer(
+                    url=data['meta']['reference'],
+                    api_key=os.getenv('GCP_API_KEY')
+                )
 
         return copy.copy(analyzer_data)
 
@@ -153,7 +167,15 @@ class PhishingTrackerAnalyzers:
             if 'exception' in analyzers_data['whois']:
                 status.append('whois_exception')
             else:
-                status.append('whois_domainname_record')
+                if analyzers_data['whois'] is not None and len(analyzers_data['whois']) > 0:
+                    status.append('whois_domainname_record')
+
+        if 'safe_browsing' in analyzers_data:
+            if 'exception' in analyzers_data['safe_browsing']:
+                status.append('safe_browsing_exception')
+            else:
+                if analyzers_data['safe_browsing'] is not None and len(analyzers_data['safe_browsing']) > 0:
+                    status.append('safe_browsing_record')
 
         analyzer_report_sets = {
             'expected': None,
@@ -189,6 +211,9 @@ class PhishingTrackerAnalyzers:
         report_data = {
             'reference': data['meta']['reference'],
             'reports': status,
-            'analyzer_report_sets': analyzer_report_sets
         }
+
+        if analyzer_report_sets['expected'] is not None or analyzer_report_sets['not_expected'] is not None:
+            report_data['analyzer_report_sets'] = analyzer_report_sets
+
         return copy.copy(report_data)
