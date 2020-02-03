@@ -25,6 +25,5 @@ def test_analyzer_examples01(capsys):
     data = json.loads(captured)
 
     assert 'analyzers_report' in data
-    assert 'analyzer_report_sets' in data['analyzers_report']
     assert 'reference' in data['analyzers_report']
     assert 'reports' in data['analyzers_report']

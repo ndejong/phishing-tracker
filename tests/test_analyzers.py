@@ -46,6 +46,5 @@ def __test_analyzer_meta(analyzers, capsys, reference='https://www.google.com'):
     data = json.loads(captured)
 
     assert 'analyzers_report' in data
-    assert 'analyzer_report_sets' in data['analyzers_report']
     assert 'reference' in data['analyzers_report']
     assert 'reports' in data['analyzers_report']
