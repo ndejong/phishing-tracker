@@ -18,7 +18,7 @@ class PhishingTrackerTests:
 
         for test_k, test_v in tests.items():
             if test_k not in data['analyzers']:
-                logger.warn('skipping {} test, no related analyzer data available'.format(test_k))
+                logger.warning('skipping {} test, no related analyzer data available'.format(test_k))
                 continue
 
             if test_k in tests and test_k not in test_data:
@@ -81,7 +81,7 @@ class PhishingTrackerTests:
                 }
 
         elif type(data) is dict and context not in data:
-            logger.warn('context "{}" not found in data'.format(str(context)))
+            logger.warning('context "{}" not found in data'.format(str(context)))
 
         else:
             logger.error('unsupported data type presented for {}'.format(str(expressions)))

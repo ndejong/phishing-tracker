@@ -70,7 +70,7 @@ class PhishingTrackerAnalyzers:
         if 'safe_browsing' in analyzers:
 
             if not os.getenv('GCP_API_KEY', None):
-                logger.warn('GCP_API_KEY environment variable not set, skipping the safe_browsing analyzer')
+                logger.warning('GCP_API_KEY environment variable not set, skipping the safe_browsing analyzer')
             else:
                 logger.debug('GCP_API_KEY environment variable setting detected, will use with safe_browsing analyzer')
                 logger.debug('safe-browsing analyzer: {}'.format(http_url))

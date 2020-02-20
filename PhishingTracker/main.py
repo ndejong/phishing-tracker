@@ -93,9 +93,9 @@ class PhishingTracker:
         # analyzer_report_sets - logging
         if 'analyzer_report_sets' in data['analyzers_report'] and data['analyzers_report']['analyzer_report_sets']:
             if 'expected' in data['analyzers_report']['analyzer_report_sets'] and data['analyzers_report']['analyzer_report_sets']['expected'] is False:
-                logger.warn('analyzer_report_sets_expected returns false!')
+                logger.warning('analyzer_report_sets_expected returns false!')
             if 'not_expected' in data['analyzers_report']['analyzer_report_sets'] and data['analyzers_report']['analyzer_report_sets']['not_expected'] is True:
-                logger.warn('analyzer_report_sets_not_expected returns true!')
+                logger.warning('analyzer_report_sets_not_expected returns true!')
 
         # tests
         if type(config) is dict and 'tests' in config.keys() and len(config['tests']) > 0:
