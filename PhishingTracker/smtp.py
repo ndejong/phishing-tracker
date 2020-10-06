@@ -17,6 +17,9 @@ class PhishingTrackerSmtp:
                 continue
             _, mx_record_hostname = mx_record.split(' ')
 
+            if mx_record_hostname == '.':
+                continue
+
             smtp_response = SMTP().connect(mx_record_hostname)
             if type(smtp_response) is tuple:
                 smtp_code, smtp_header = smtp_response
