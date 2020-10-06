@@ -1,4 +1,5 @@
 
+import os
 import json
 import pytest
 import PhishingTracker
@@ -36,6 +37,11 @@ def test_analyzer_https_certificate(capsys):
 
 
 def __test_analyzer_meta(analyzers, capsys, reference='https://www.google.com'):
+
+    if 'TRAVIS' in os.environ:
+        # TravisCI does not permit outbound connections
+        return
+
     PhishingTracker.PhishingTracker(debug=True).main(
         reference=reference,
         analyzers=analyzers,
