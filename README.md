@@ -24,13 +24,27 @@ See examples to get a clear idea on usage and possibilities.
 * Debug mode output to STDERR
 
 ## Analyzers
+
+### `dig`
 * dig-domain - determine domain relative to TLD and collect A, CNAME, NS, MX, TXT records
 * dig-hostname - collect hostname A, AAAA, CNAME, NS, MX, TXT records
+
+### `http`
 * http-get - perform http (clear-text) GET request capturing request/response headers and response content
+
+### `https`
 * https-get - as per http-get using HTTPS
+
+### `https_certificate`
 * https-certificate - obtain the https SSL certificate and parse certificate attributes 
+
+### `smtp`
 * smtp-headers - connect to hostname/domain MX records and capture the server header 
+
+### `safe_browsing`
 * safe-browsing - query the Google safe-browsing API - https://developers.google.com/safe-browsing/v4
+
+### `whois`
 * whois - perform a whois and parse associated attributes
 
 ## Analyzers - Todo
