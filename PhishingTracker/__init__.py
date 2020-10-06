@@ -1,5 +1,6 @@
 
 analyzers_available = ['dig', 'http', 'https', 'https_certificate', 'smtp', 'whois', 'safe_browsing']
+analyzer_action_timeout = 10
 
 from .__name__ import NAME
 from .__version__ import VERSION

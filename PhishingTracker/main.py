@@ -30,6 +30,8 @@ class PhishingTracker:
         logger = PhishingTrackerLogger(level=log_level).logger
         logger.info('{} v{}'.format(NAME, VERSION))
 
+        #socket.setdefaulttimeout(socket_timeout)
+
     def main(self, reference=None, filename=None, pathname=None, analyzers=None):
 
         ts = timestamp()

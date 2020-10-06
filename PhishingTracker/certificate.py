@@ -7,17 +7,23 @@ import tempfile
 from .util import json_dumps
 from .util import datetime_parse
 
+import eventlet
+eventlet.monkey_patch()
+
 
 class PhishingTrackerCertificate:
 
     @staticmethod
-    def analyzer(hostname, port=443, append_raw_certificate=True):
+    def analyzer(hostname, port=443, append_raw_certificate=True, timeout=10):
         conn = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
         context = ssl.SSLContext(ssl.PROTOCOL_SSLv23)
         sock = context.wrap_socket(conn, server_hostname=hostname)
 
         try:
-            sock.connect((hostname, port))
+            with eventlet.Timeout(timeout):
+                sock.connect((hostname, port))
+        except eventlet.timeout.Timeout as e:
+            return {'exception': str(e)}
         except Exception as e:
             return 'Exception: {}'.format(str(e))
 

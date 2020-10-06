@@ -2,6 +2,8 @@
 import os
 import copy
 
+from . import analyzer_action_timeout
+
 from . import PhishingTrackerCertificate
 from . import PhishingTrackerDig
 from . import PhishingTrackerSmtp
@@ -57,15 +59,18 @@ class PhishingTrackerAnalyzers:
 
         if 'http' in analyzers:
             logger.debug('http-get analyzer: {}'.format(http_url))
-            analyzer_data['http'] = PhishingTrackerWeb.analyzer(url=http_url)
+            analyzer_data['http'] = PhishingTrackerWeb.analyzer(url=http_url, timeout=analyzer_action_timeout)
 
         if 'https' in analyzers or 'https_certificate' in analyzers:
             logger.debug('https-get analyzer: {}'.format(https_url))
-            analyzer_data['https'] = PhishingTrackerWeb.analyzer(url=https_url)
+            analyzer_data['https'] = PhishingTrackerWeb.analyzer(url=https_url, timeout=analyzer_action_timeout)
 
         if 'https_certificate' in analyzers:
             logger.debug('https-certificate analyzer: {}'.format(https_url))
-            analyzer_data['https_certificate'] = PhishingTrackerCertificate.analyzer(hostname=data['meta']['host_name'])
+            analyzer_data['https_certificate'] = PhishingTrackerCertificate.analyzer(
+                hostname=data['meta']['host_name'],
+                timeout=analyzer_action_timeout
+            )
 
         if 'safe_browsing' in analyzers:
 
