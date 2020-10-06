@@ -40,6 +40,7 @@ setup(
         'pydig',
         'pyyaml',
         'requests',
+        'eventlet',
         'dateparser',
         'tldextract',
         'python-whois',
